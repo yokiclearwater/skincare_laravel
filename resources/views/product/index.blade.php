@@ -2,15 +2,17 @@
 
 @section('content')
     <div class="container p-2">
-        <div class="flex flex-row gap-4 items-center justify-between">
-            <a href="{{ route('products.create') }}" class="btn btn-success btn-lg my-3 bg-green-600">Add To New Skincare
-                Product</a>
-            <form action="{{ route('search') }}" class="flex flex-row gap-4" method="GET">
-                <div class="form-group">
-                    <input type="search" class="form-control form-control-lg" placeholder="Search" name="search">
-                </div>
-                <button type="submit" class="btn btn-primary bg-blue-500 w-32 text-xl">Search</button>
-            </form>
+        <div class="bg-white my-4 px-4 rounded-md shadow-md">
+            <div class="flex flex-row gap-4 items-center justify-between">
+                <a href="{{ route('products.create') }}" class="btn btn-success btn-lg my-3 bg-green-600">Add To New Skincare
+                    Product</a>
+                <form action="{{ route('products.index') }}" class="flex flex-row gap-4" method="GET">
+                    <div class="form-group">
+                        <input type="search" class="form-control form-control-lg" placeholder="Search" name="search">
+                    </div>
+                    <button type="submit" class="btn btn-primary bg-blue-500 w-32 text-xl">Search</button>
+                </form>
+            </div>
         </div>
         <div class="flex w-full flex-wrap gap-4 md:justify-start justify-center">
             @foreach ($products as $product)
@@ -21,8 +23,8 @@
                         <h5 class="card-title text-2xl font-bold">{{ $product->name }}</h5>
                     </div>
                     <ul class="list-group list-group-flush text-xl">
-                        <li class="list-group-item">Price : $ 45</li>
-                        <li class="list-group-item">Category : Serum</li>
+                        <li class="list-group-item">Price : $ {{$product->price}}</li>
+                        <li class="list-group-item">Category : {{$product->category}}</li>
                     </ul>
                     <div class="card-body text-xl">
                         <p class="card-text">{{ \Illuminate\Support\Str::limit($product->description, 100, '...') }}</p>

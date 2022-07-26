@@ -15,22 +15,28 @@ class ProductController extends Controller
      */
     protected $categories = array('Cleanser', 'Exforliator', 'Treatment', 'Serum', 'Face Oil', 'Sunscreen');
 
-    public function index()
+    public function index(Request $request)
     {
+        $products_query = Product::query();
+        $search = $request->search;
 
-        $products = Product::all();
+        if($search) {
+            $products_query = Product::search($search);
+        }
+
+        $products = $products_query->get();
 
         // dd($request->all());
 
         return view('product.index')->with('products', $products);
     }
 
-    public function search(Request $request)
-    {
-        $products = Product::where('name', 'like', '%' . $request->search . '%')->get();
+    // public function search(Request $request)
+    // {
+    //     $products = Product::where('name', 'like', '%' . $request->search . '%')->get();
 
-        return view('product.index')->with('products', $products);
-    }
+    //     return view('product.index')->with('products', $products);
+    // }
 
     /**
      * Show the form for creating a new resource.

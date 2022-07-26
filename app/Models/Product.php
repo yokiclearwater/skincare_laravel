@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
+use Laravel\Scout\Attributes\SearchUsingPrefix;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
+
 
     protected $table = 'products';
     protected $primarykey = 'id';
@@ -19,4 +22,16 @@ class Product extends Model
         'description',
         'image',
     ];
+
+    #[SearchUsingPrefix('name')]
+    public function toSearchableArray() {
+        return [
+            'name' => $this->name,
+            'price' => $this->price,
+            'category' => $this->category,
+            'description' => $this->description,
+            'image' => $this->image,
+        ];
+    }
+
 }

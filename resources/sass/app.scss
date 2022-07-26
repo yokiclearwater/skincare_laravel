@@ -1,12 +1,21 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background: url('https://i.pinimg.com/originals/9f/92/6c/9f926c8c220127d81c8ba6897aa8d5db.gif') no-repeat;
+    object-fit: cover;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    backdrop-filter: blur(10px);
+}

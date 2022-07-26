@@ -26,5 +26,5 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('products', ProductController::class)->middleware('auth');
 // search route
-Route::get('products', [ProductController::class, 'search'])->name('search');
+// Route::get('products', [ProductController::class, 'search'])->name('search');
 
