@@ -20,13 +20,11 @@ class ProductController extends Controller
         $products_query = Product::query();
         $search = $request->search;
 
-        if($search) {
+        if ($search) {
             $products_query = Product::search($search);
         }
 
         $products = $products_query->get();
-
-        // dd($request->all());
 
         return view('product.index')->with('products', $products);
     }
@@ -57,8 +55,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-
         $request->validate([
             'name' => 'required',
             'price' => 'required|numeric',
@@ -67,8 +63,9 @@ class ProductController extends Controller
             'image' => 'required|image',
         ]);
 
-        $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+        $newImageName = time() . '-' . $request->image->hashName();
         $request->image->move(public_path('images'), $newImageName);
+
 
         Product::create([
             'name' => $request->name,
@@ -141,7 +138,7 @@ class ProductController extends Controller
                 File::delete($old_image_path);
             }
 
-            $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+            $newImageName = time() . '-' . $request->image->hashName();
             $request->image->move(public_path('images'), $newImageName);
         }
 
@@ -153,8 +150,6 @@ class ProductController extends Controller
             'image' => $newImageName ?? $product->image,
         ]);
 
-
-        // dd($request->all());
         return redirect()->route('products.index');
     }
 

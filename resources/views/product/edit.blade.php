@@ -3,7 +3,7 @@
 @section('content')
     <div class="container flex md:flex-row flex-col gap-4">
         <img class="md:w-[40%] w-full m-auto rounded-lg object-cover shadow-md" src="{{ asset('images/' . $product->image) }}" alt="">
-        <div class="container bg-blue-100 p-4 rounded-lg text-2xl">
+        <div class="container bg-rose-100 p-4 rounded-lg text-2xl">
             <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data"
                 class="flex gap-3 flex-col">
                 @csrf
@@ -36,7 +36,7 @@
                     <label for="description">Description</label>
                     <textarea required class="form-control form-control-lg" id="description" rows="3" name="description">{{ $product->description }}</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary bg-blue-400 btn-md text-2xl">Update</button>
+                <button type="submit" class="btn btn-danger bg-rose-400 btn-md text-2xl">Update</button>
             </form>
             @if ($errors->any())
                 <div class="m-auto text-center w-4/8">
